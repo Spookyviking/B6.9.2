@@ -1,0 +1,23 @@
+---
+
+- name: Create superusers group
+  hosts: localhost
+
+  tasks:
+    - name: Create group superusers
+      group:
+        name: superusers
+        state: present
+
+    - name: Add users user2 and user3 to group superusers
+      user:
+        name: "{{ item }}"
+        groups: superusers
+      with_items:
+        - user2
+        - user3
+
+    - name: Add sudoers rule for group superusers
+      lineinfile:
+        path: /etc/sudoers
+        line: '%superusers ALL=(ALL) NOPASSWD: ALL'

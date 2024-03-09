@@ -1,0 +1,36 @@
+---
+# tasks file for lep_role
+
+- name: Install Nginx and PHP-FPM packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nginx
+    - php-fpm
+
+- name: Copy Nginx configuration file
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/sites-available/default
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copy index.php file
+  template:
+    src: templates/index.php.j2
+#    dest: /var/www/html/index.php
+    dest: /opt/nginx/ansible/index.php
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Restart Nginx and PHP-FPM services
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+#    - nginx
+    - php8.2-fpm
+

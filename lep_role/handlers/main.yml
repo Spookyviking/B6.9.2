@@ -1,0 +1,7 @@
+---
+# handlers file for lep_role
+
+   - name: reload nginx
+     service:
+       name: nginx
+       state: reloaded

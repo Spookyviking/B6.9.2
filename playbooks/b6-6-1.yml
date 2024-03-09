@@ -1,0 +1,4 @@
+   - name: Playbook to install and start vsftpd
+     hosts: localhost
+     roles:
+       - vsftpd_role

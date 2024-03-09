@@ -1,0 +1,13 @@
+---
+- name: Запуск MySQL-сервера
+  hosts: localhost
+  tasks:
+    - name: Установить пакет mysql-server
+      package:
+        name: mariadb-server
+        state: present
+
+    - name: Запустить сервис MySQL
+      service:
+        name: mysql
+        state: started
