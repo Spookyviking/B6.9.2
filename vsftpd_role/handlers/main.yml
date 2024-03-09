@@ -1,8 +1,0 @@
----
-# handlers file for vsftpd_role
-
-   - name: Restart vsftpd service
-     service:
-       name: vsftpd
-       state: restarted
-
